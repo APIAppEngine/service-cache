@@ -30,7 +30,7 @@ import java.util.concurrent.Future;
  * User: mikenimer
  * Date: 7/19/13
  */
-public interface DocumentGateway
+public interface CacheGateway
 {
     Future<DocumentJob> addDocument(UploadDocumentJob args);
 

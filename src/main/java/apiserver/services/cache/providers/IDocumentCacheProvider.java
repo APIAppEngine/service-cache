@@ -19,7 +19,7 @@ package apiserver.services.cache.providers;
  along with the ApiServer Project.  If not, see <http://www.gnu.org/licenses/>.
  ******************************************************************************/
 
-import apiserver.apis.v1_0.documents.model.Document;
+import apiserver.core.model.IDocument;
 
 /**
  * User: mnimer
@@ -34,19 +34,19 @@ public interface IDocumentCacheProvider
      * @param obj
      * @return  key
      */
-    Document add(Document obj);
+    IDocument add(IDocument obj);
 
     /**
      * Get an item out of the cache, based on KEY returned from add() method
      * @param key
      * @return  object in cache or NULL
      */
-    Document get(String key);
+    IDocument get(String key);
 
     /**
      * Get an item out of the cache, based on KEY returned from add() method
      * @param key
      * @return  object in cache or NULL
      */
-    Document delete(String key);
+    IDocument delete(String key);
 }

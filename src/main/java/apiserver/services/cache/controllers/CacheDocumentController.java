@@ -20,12 +20,12 @@ package apiserver.services.cache.controllers;
  along with the ApiServer Project.  If not, see <http://www.gnu.org/licenses/>.
  ******************************************************************************/
 
+import apiserver.core.common.ResponseEntityHelper;
 import apiserver.services.cache.DocumentJob;
-import apiserver.services.cache.gateway.DocumentGateway;
+import apiserver.services.cache.gateway.CacheGateway;
 import apiserver.services.cache.gateway.jobs.DeleteDocumentJob;
 import apiserver.services.cache.gateway.jobs.GetDocumentJob;
 import apiserver.services.cache.gateway.jobs.UploadDocumentJob;
-import apiserver.core.common.ResponseEntityHelper;
 import com.wordnik.swagger.annotations.Api;
 import com.wordnik.swagger.annotations.ApiOperation;
 import com.wordnik.swagger.annotations.ApiParam;
@@ -56,21 +56,21 @@ import java.util.concurrent.TimeoutException;
  * Date: 9/18/12
  */
 @Controller
-@Api(value = "/documents", description = "[Documents]")
-@RequestMapping("/documents")
-public class DocumentController
+//@Api(value = "/cache/documents", description = "[Documents]")
+@RequestMapping("/cache/documents")
+public class CacheDocumentController
 {
     @Qualifier("documentAddGateway")
     @Autowired(required = false)
-    public DocumentGateway documentAddGateway;
+    public CacheGateway documentAddGateway;
 
     @Qualifier("documentDeleteGateway")
     @Autowired(required = false)
-    public DocumentGateway documentDeleteGateway;
+    public CacheGateway documentDeleteGateway;
 
     @Qualifier("documentGetGateway")
     @Autowired(required = false)
-    public DocumentGateway documentGetGateway;
+    public CacheGateway documentGetGateway;
 
     private
     @Value("#{applicationProperties.defaultReplyTimeout}")
@@ -84,7 +84,7 @@ public class DocumentController
      * @param tags list of metadata tags
      * @return cache ID
      */
-    @ApiOperation(value = "add a document to cache", multiValueResponse = true)
+    //@ApiOperation(value = "add a document to cache", multiValueResponse = true)
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public WebAsyncTask<String> addDocument(
             @ApiParam(name = "uploadedFile", required = true)
@@ -147,7 +147,7 @@ public class DocumentController
     /**
      * Return the metadata and general file information about the object.
      *
-     * @param documentId id of document in the persistence/cache layer
+     * @param documentId id of cache item in the persistence/cache layer
      * @return Map of metadata & file properties
      */
     @ResponseBody
@@ -163,14 +163,14 @@ public class DocumentController
 
 
     /**
-     * pull document out of cache
+     *  delete an document from cache
      *
      * @param documentId id of document in the persistence/cache layer
      * @return TRUE if the item was deleted successfully
      */
-    @ApiOperation(value = "delete a document")
+    @ApiOperation(value = "delete an document from cache")
     @RequestMapping(value = "/{documentId}", method = {RequestMethod.DELETE})
-    public WebAsyncTask<Boolean> deleteImage(
+    public WebAsyncTask<Boolean> deleteDocument(
             @ApiParam(name = "documentId", required = true) @PathVariable(value = "documentId") String documentId)
     {
         final String _documentId = documentId;

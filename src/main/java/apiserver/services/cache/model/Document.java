@@ -20,6 +20,7 @@ package apiserver.services.cache.model;
  ******************************************************************************/
 
 import apiserver.MimeType;
+import apiserver.core.model.IDocument;
 import org.apache.commons.io.FileUtils;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -38,7 +39,7 @@ import java.util.UUID;
  * User: mnimer
  * Date: 9/28/12
  */
-public class Document implements Serializable
+public class Document implements IDocument, Serializable
 {
     private String id;
     private String fileName;

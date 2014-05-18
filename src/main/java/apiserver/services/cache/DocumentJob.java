@@ -19,7 +19,7 @@ package apiserver.services.cache;
  along with the ApiServer Project.  If not, see <http://www.gnu.org/licenses/>.
  ******************************************************************************/
 
-import apiserver.apis.v1_0.documents.model.Document;
+import apiserver.core.model.IDocument;
 
 /**
  * User: mikenimer
@@ -28,15 +28,15 @@ import apiserver.apis.v1_0.documents.model.Document;
 public class DocumentJob
 {
 
-    private Document document;
+    private IDocument document;
 
 
-    public Document getDocument()
+    public IDocument getDocument()
     {
         return document;
     }
 
-    public void setDocument(Document document)
+    public void setDocument(IDocument document)
     {
         this.document = document;
     }

@@ -64,7 +64,7 @@ public class UploadDocumentJob extends DocumentJob
      */
     public void setTags(String[] tags)
     {
-        this.getDocument().setTags(tags);
+        ((UploadDocumentJob)this.getDocument()).setTags(tags);
     }
 
 }

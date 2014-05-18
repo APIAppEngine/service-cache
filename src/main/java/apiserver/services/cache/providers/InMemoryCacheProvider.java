@@ -20,7 +20,10 @@ package apiserver.services.cache.providers;
  ******************************************************************************/
 
 import apiserver.MimeType;
-import apiserver.apis.v1_0.documents.model.Document;
+import apiserver.core.model.IDocument;
+import apiserver.services.cache.DocumentJob;
+import apiserver.services.cache.model.Document;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
@@ -33,7 +36,7 @@ import java.util.UUID;
  * User: mikenimer
  * Date: 10/25/13
  */
-@Service
+@Component
 public class InMemoryCacheProvider implements IDocumentCacheProvider
 {
 
@@ -66,11 +69,11 @@ public class InMemoryCacheProvider implements IDocumentCacheProvider
 
 
     @Override
-    public Document add(Document doc)
+    public IDocument add(IDocument doc)
     {
         if( doc.getId() == null )
         {
-            doc.setId(UUID.randomUUID().toString());
+            ((Document)doc).setId(UUID.randomUUID().toString());
         }
         cache.put(doc.getId(), doc);
         return doc;

@@ -19,9 +19,9 @@ package apiserver.services.cache.services;
  along with the ApiServer Project.  If not, see <http://www.gnu.org/licenses/>.
  ******************************************************************************/
 
+import apiserver.core.model.IDocument;
 import apiserver.services.cache.DocumentJob;
-import apiserver.apis.v1_0.documents.gateway.jobs.GetDocumentJob;
-import apiserver.apis.v1_0.documents.model.Document;
+import apiserver.services.cache.gateway.jobs.GetDocumentJob;
 import apiserver.services.cache.providers.IDocumentCacheProvider;
 import apiserver.exceptions.MessageConfigException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,7 +47,7 @@ public class DocumentService
         if( !(payload instanceof GetDocumentJob) || ((GetDocumentJob)payload).getDocumentId() == null ){ return message; }
 
         GetDocumentJob p = (GetDocumentJob) payload;
-        Document document = cacheProvider.get(p.getDocumentId());
+        IDocument document = cacheProvider.get(p.getDocumentId());
         p.setDocument(document);
         return message;
     }
@@ -61,7 +61,7 @@ public class DocumentService
 
         if( payload.getDocument() != null )
         {
-            Document document = cacheProvider.add(payload.getDocument());
+            IDocument document = cacheProvider.add(payload.getDocument());
             payload.setDocument(document);
         }
 
