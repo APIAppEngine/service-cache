@@ -28,6 +28,6 @@ public class CacheMicroServiceApplication implements EmbeddedServletContainerCus
     @Override
     public void customize(ConfigurableEmbeddedServletContainer configurableEmbeddedServletContainer)
     {
-        //configurableEmbeddedServletContainer.setPort(9001);
+        configurableEmbeddedServletContainer.setPort(9001);
     }
 }
