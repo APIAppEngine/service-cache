@@ -21,6 +21,8 @@ package apiserver.services.cache.gateway.jobs;
 
 import apiserver.services.cache.DocumentJob;
 
+import java.util.Map;
+
 /**
  * User: mikenimer
  * Date: 7/19/13
@@ -40,5 +42,6 @@ public class  GetDocumentJob extends DocumentJob
     {
         this.documentId = documentId;
     }
+
 
 }

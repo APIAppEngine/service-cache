@@ -232,4 +232,28 @@ public class Document implements IDocument, Serializable
         return (File)this.file;
     }
 
+    /** Serializable example for BufferedImage
+     *
+     private void writeObject(java.io.ObjectOutputStream out)throws IOException{
+     out.writeObject(name);
+     ImageIO.write(image,"jpeg",ImageIO.createImageOutputStream(out));
+     }
+
+     private void readObject(java.io.ObjectInputStream in)throws IOException, ClassNotFoundException{
+     name=(String)in.readObject();
+     image=ImageIO.read(ImageIO.createImageInputStream(in));
+     }
+
+     //alternative
+     private void writeObject(java.io.ObjectOutputStream out) throws IOException {
+     out.writeObject(name);
+     ImageWriter writer = (ImageWriter) ImageIO.getImageWritersBySuffix("jpg").next();
+     writer.setOutput(ImageIO.createImageOutputStream(out));
+     ImageWriteParam param = writer.getDefaultWriteParam();
+     param.setCompressionMode(ImageWriteParam.MODE_EXPLICIT);
+     param.setCompressionQuality(0.85f);
+     writer.write(null, new IIOImage(image, null, null), param);
+     }
+     */
+
 }

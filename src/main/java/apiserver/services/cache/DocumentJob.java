@@ -21,13 +21,16 @@ package apiserver.services.cache;
 
 import apiserver.core.model.IDocument;
 
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * User: mikenimer
  * Date: 10/24/13
  */
 public class DocumentJob
 {
-
     private IDocument document;
 
 
@@ -39,5 +42,19 @@ public class DocumentJob
     public void setDocument(IDocument document)
     {
         this.document = document;
+    }
+
+    public Map toMap()
+    {
+        Map map = new HashMap();
+        /**
+        map.put(CONTENT_TYPE, getDocument().getContentType());
+        map.put(FILE_NAME, getDocument().getFileName());
+        try {
+            map.put(FILE, getDocument().getFile());
+        }catch(IOException e){
+            map.put(FILE, null);
+        }**/
+        return map;
     }
 }
