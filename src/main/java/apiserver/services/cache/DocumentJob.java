@@ -22,6 +22,7 @@ package apiserver.services.cache;
 import apiserver.core.model.IDocument;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -29,7 +30,7 @@ import java.util.Map;
  * User: mikenimer
  * Date: 10/24/13
  */
-public class DocumentJob
+public class DocumentJob implements Serializable
 {
     private IDocument document;
 
