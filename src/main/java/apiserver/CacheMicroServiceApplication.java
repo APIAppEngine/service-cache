@@ -16,7 +16,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @EnableAutoConfiguration
 @ComponentScan
 @EnableWebMvc
-@ImportResource("cache-flow-config.xml")
+@ImportResource("classpath*:cache-flow-config.xml")
 public class CacheMicroServiceApplication implements EmbeddedServletContainerCustomizer
 {
 
