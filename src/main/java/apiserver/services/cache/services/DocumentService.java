@@ -69,6 +69,8 @@ public class DocumentService
         return message;
     }
 
+
+
     public Message<?> deleteFromCache(Message<?> message)
     {
         if( !(message.getPayload() instanceof DocumentJob) ){ return message; }

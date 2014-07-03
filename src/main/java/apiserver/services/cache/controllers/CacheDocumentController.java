@@ -139,7 +139,7 @@ public class CacheDocumentController
 
         return ResponseEntityHelper.processFile(
                 payload.getDocument().getFileBytes(),
-                payload.getDocument().getContentType().name(), false);
+                payload.getDocument().getContentType().contentType, false);
 
     }
 

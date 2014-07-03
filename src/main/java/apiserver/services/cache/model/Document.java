@@ -21,6 +21,7 @@ package apiserver.services.cache.model;
 
 import apiserver.MimeType;
 import apiserver.core.model.IDocument;
+import apiserver.workers.coldfusion.model.FileByteWrapper;
 import org.apache.commons.io.FileUtils;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -84,8 +85,32 @@ public class Document implements IDocument, Serializable
     }
 
 
+    /**
+     * Create the document with the raw bytes of a file
+     * @param file
+     * @throws java.io.IOException
+     */
+    public Document(FileByteWrapper file) throws IOException
+    {
+        setFile(file);
+    }
+
+
     public void setFile(Object file) throws IOException
     {
+        // if byte[] write to tmp file and then cache that.
+        if (file instanceof FileByteWrapper)
+        {
+            String[] nameParts = ((FileByteWrapper)file).getName().split("\\.");
+            File tmpFile = File.createTempFile( nameParts[0], "." +nameParts[1]   );
+            //convert array of bytes into file
+            FileOutputStream fs = new FileOutputStream(tmpFile);
+            fs.write( ((FileByteWrapper)file).getBytes() );
+            fs.close();
+            tmpFile.deleteOnExit();
+            file = tmpFile;
+        }
+
         if( file instanceof  File )
         {
             if( !((File)file).exists() || ((File)file).isDirectory() )
@@ -127,6 +152,7 @@ public class Document implements IDocument, Serializable
             byteArrayOutputStream.close();
             this.setFileBytes(imageBytes);
         }
+
     }
 
 
