@@ -2,31 +2,32 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <parent>
-        <groupId>com.mikenimer.apiserver</groupId>
-        <artifactId>apiserver</artifactId>
+        <groupId>com.mikenimer.apiappengine</groupId>
+        <artifactId>APIAppEngine</artifactId>
         <version>1.0.0-SNAPSHOT</version>
         <relativePath>../APIAppEngine/pom.xml</relativePath>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.mikenimer.apiserver</groupId>
+    <groupId>com.mikenimer.apiappengine</groupId>
     <artifactId>service-cache</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <packaging>jar</packaging>
+
     <name>service-cache</name>
     <url>http://maven.apache.org</url>
 
     <dependencies>
         <dependency>
-            <groupId>com.mikenimer.apiserver</groupId>
+            <groupId>com.mikenimer.apiappengine</groupId>
             <artifactId>service-core</artifactId>
             <version>1.0.0-SNAPSHOT</version>
         </dependency>
 
         <dependency>
-            <groupId>com.mikenimer.apiserver</groupId>
-            <artifactId>worker-coldfusion</artifactId>
+            <groupId>com.mikenimer.apiappengine.connectors</groupId>
+            <artifactId>connector-coldfusion</artifactId>
             <version>1.0.0-SNAPSHOT</version>
         </dependency>
 
@@ -87,6 +88,60 @@
                     <source>1.7</source>
                     <target>1.7</target>
                 </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>com.mikenimer.apiappengine.util</groupId>
+                <artifactId>swagger-plugin</artifactId>
+                <version>1.0.0-SNAPSHOT</version>
+                <executions>
+                    <execution>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>swagger-springmvc-generator</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <outputDirectoryAndFile>${project.build.outputDirectory}/api-docs/docs/index.json</outputDirectoryAndFile>
+
+                    <apiListing>
+                        <apiVersion>1.0</apiVersion>
+                        <swaggerVersion>1.2</swaggerVersion>
+
+                        <info>
+                            <title>Cache Services</title>
+                            <description>A collection of different cache REST Services.</description>
+                            <termsOfServiceUrl></termsOfServiceUrl>
+                            <contact></contact>
+                            <license></license>
+                            <licenseUrl></licenseUrl>
+                        </info>
+
+                        <services>
+                            <service>
+                                <name>Ping</name>
+                                <description>Simple health check for this set of micro service.</description>
+                                <basePath>/</basePath>
+                                <basePackage>
+                                    <basePackage>apiserver.services.cache.controllers.TestCacheController</basePackage>
+                                </basePackage>
+                            </service>
+                            <service>
+                                <name>Document Cache</name>
+                                <description>Support for document caching.</description>
+                                <basePath>/</basePath>
+                                <basePackage>
+                                    <basePackage>apiserver.services.cache.controllers.CacheDocumentController</basePackage>
+                                </basePackage>
+                            </service>
+
+                        </services>
+
+                    </apiListing>
+
+                </configuration>
+
             </plugin>
         </plugins>
     </build>
