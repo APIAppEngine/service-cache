@@ -112,7 +112,7 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <outputDirectoryAndFile>${project.build.outputDirectory}/api-docs/docs/index.json</outputDirectoryAndFile>
+                    <outputDirectoryAndFile>${project.build.outputDirectory}/api-docs/cache/index.json</outputDirectoryAndFile>
 
                     <apiListing>
                         <apiVersion>1.0</apiVersion>
