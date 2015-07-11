@@ -54,7 +54,8 @@
 
 
 
-    <si:chain input-channel="cacheAddChannelRequestChannel"
+    <si:chain id="documentAdd-flow"
+              input-channel="cacheAddChannelRequestChannel"
               output-channel="cacheAddChannelReplyChannel">
 
         <si:service-activator

@@ -54,7 +54,8 @@
 
 
 
-    <si:chain input-channel="documentDeleteChannelRequestChannel"
+    <si:chain id="documentDelete-flow"
+              input-channel="documentDeleteChannelRequestChannel"
               output-channel="documentDeleteChannelReplyChannel">
 
         <si:service-activator

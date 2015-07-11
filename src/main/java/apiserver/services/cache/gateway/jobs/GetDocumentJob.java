@@ -31,17 +31,14 @@ public class  GetDocumentJob extends DocumentJob
 {
     private String documentId;
 
-
     public String getDocumentId()
     {
         return documentId;
     }
 
-
     public void setDocumentId(String documentId)
     {
         this.documentId = documentId;
     }
-
 
 }

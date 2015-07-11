@@ -55,7 +55,8 @@
 
 
 
-    <si:chain input-channel="cacheGetChannelRequestChannel"
+    <si:chain id="documentGet-flow"
+              input-channel="cacheGetChannelRequestChannel"
               output-channel="cacheGetChannelReplyChannel">
 
         <si:service-activator

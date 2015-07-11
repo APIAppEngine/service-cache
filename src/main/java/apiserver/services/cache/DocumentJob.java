@@ -34,7 +34,6 @@ public class DocumentJob implements Serializable
 {
     private IDocument document;
 
-
     public IDocument getDocument()
     {
         return document;
@@ -45,17 +44,4 @@ public class DocumentJob implements Serializable
         this.document = document;
     }
 
-    public Map toMap()
-    {
-        Map map = new HashMap();
-        /**
-        map.put(CONTENT_TYPE, getDocument().getContentType());
-        map.put(FILE_NAME, getDocument().getFileName());
-        try {
-            map.put(FILE, getDocument().getFile());
-        }catch(IOException e){
-            map.put(FILE, null);
-        }**/
-        return map;
-    }
 }
