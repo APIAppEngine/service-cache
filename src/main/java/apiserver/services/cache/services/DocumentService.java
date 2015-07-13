@@ -20,12 +20,12 @@ package apiserver.services.cache.services;
  ******************************************************************************/
 
 import apiserver.core.model.IDocument;
+import apiserver.exceptions.MessageConfigException;
 import apiserver.services.cache.DocumentJob;
 import apiserver.services.cache.gateway.jobs.GetDocumentJob;
 import apiserver.services.cache.providers.IDocumentCacheProvider;
-import apiserver.exceptions.MessageConfigException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.Message;
+import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 
@@ -34,16 +34,22 @@ import java.io.IOException;
  * Date: 9/27/12
  */
 // todo? investigate cache regions, maybe put all of these in a document 'region' to separate the cache from connection and encryption cache
+@Service
 public class DocumentService
 {
-
-    @Autowired
     private IDocumentCacheProvider cacheProvider;
+
+
+    public void setCacheProvider(IDocumentCacheProvider cacheProvider)
+    {
+        this.cacheProvider = cacheProvider;
+    }
 
 
     public Message<?> getFromCache(Message<?> message) throws MessageConfigException, IOException
     {
         Object payload = message.getPayload();
+        if( cacheProvider == null ){ return message; }
         if( !(payload instanceof GetDocumentJob) || ((GetDocumentJob)payload).getDocumentId() == null ){ return message; }
 
         GetDocumentJob p = (GetDocumentJob) payload;
